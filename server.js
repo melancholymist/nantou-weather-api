@@ -11,11 +11,14 @@ dotenv.config();
 // 2. 建立 app
 const app = express();
 
-// 3. 固定用 3100 port
-const PORT = 3100;
+// 3. 因為Zeabur所以調整為 3000 port
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
 
 // 4. 啟動時先印一行，確認真的是這一份在跑
-console.log("✅ server.js 啟動中（使用 3100 port，有設定 CORS＋getAdvice）");
+console.log("✅ server.js 啟動中（使用 3000 port，有設定 CORS＋getAdvice）");
 
 // 5. 每一個 request 都印出 method / url，方便你確認
 app.use((req, res, next) => {
@@ -407,5 +410,9 @@ app.get("/api/weather/puli", async (req, res) => {
 
 // 11. 啟動伺服器
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running at http://127.0.0.1:${PORT}`);
+  console.log(
+    `🚀 Server is running at http://127.0.0.1:${PORT}`
+  );
 });
+
+
